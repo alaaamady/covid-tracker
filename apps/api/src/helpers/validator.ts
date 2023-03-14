@@ -1,6 +1,5 @@
 import Joi from 'joi';
 import { Request, Response, NextFunction } from 'express';
-import Logger from '../core/Logger';
 import { BadRequestError } from '../core/ApiError';
 import { Types } from 'mongoose';
 
@@ -32,7 +31,7 @@ export const JoiAuthBearer = () =>
 
 export default (
     schema: Joi.AnySchema,
-    source: ValidationSource = ValidationSource.BODY,
+    source: ValidationSource = ValidationSource.BODY
   ) =>
   (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -44,7 +43,7 @@ export default (
       const message = details
         .map((i) => i.message.replace(/['"]+/g, ''))
         .join(',');
-      Logger.error(message);
+      console.error(message);
 
       next(new BadRequestError(message));
     } catch (error) {

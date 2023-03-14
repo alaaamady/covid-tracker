@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import Logger from '../core/Logger';
 import { db } from '../config';
 
 console.log('DB', db);
@@ -14,8 +13,6 @@ const options = {
   connectTimeoutMS: 60000, // Give up initial connection after 10 seconds
   socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
 };
-
-Logger.debug(dbURI);
 
 function setRunValidators() {
   this.setOptions({ runValidators: true });
@@ -33,27 +30,27 @@ mongoose
   })
   .connect(dbURI, options)
   .then(() => {
-    Logger.info('Mongoose connection done');
+    console.info('Mongoose connection done');
   })
   .catch((e) => {
-    Logger.info('Mongoose connection error');
-    Logger.error(e);
+    console.info('Mongoose connection error');
+    console.error(e);
   });
 
 // CONNECTION EVENTS
 // When successfully connected
 mongoose.connection.on('connected', () => {
-  Logger.debug('Mongoose default connection open to ' + dbURI);
+  console.debug('Mongoose default connection open to ' + dbURI);
 });
 
 // If the connection throws an error
 mongoose.connection.on('error', (err) => {
-  Logger.error('Mongoose default connection error: ' + err);
+  console.error('Mongoose default connection error: ' + err);
 });
 
 // When the connection is disconnected
 mongoose.connection.on('disconnected', () => {
-  Logger.info('Mongoose default connection disconnected');
+  console.info('Mongoose default connection disconnected');
 });
 
 // If the Node process ends, close the Mongoose connection

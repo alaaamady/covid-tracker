@@ -1,5 +1,4 @@
 import express, { Request, Response, NextFunction } from 'express';
-import Logger from './core/Logger';
 import cors from 'cors';
 import { corsUrl, environment } from './config';
 import './database'; // initialize database
@@ -12,7 +11,7 @@ import {
 import routes from './routes';
 
 process.on('uncaughtException', (e) => {
-  Logger.error(e);
+  console.error(e);
 });
 
 const app = express();
@@ -37,14 +36,14 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   if (err instanceof ApiError) {
     ApiError.handle(err, res);
     if (err.type === ErrorType.INTERNAL)
-      Logger.error(
+      console.error(
         `500 - ${err.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`
       );
   } else {
-    Logger.error(
+    console.error(
       `500 - ${err.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`
     );
-    Logger.error(err);
+    console.error(err);
     if (environment === 'development') {
       return res.status(500).send(err);
     }

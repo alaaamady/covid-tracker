@@ -1,4 +1,4 @@
-import Joi, { string } from 'joi';
+import Joi from 'joi';
 
 export const logSchema = {
   findByUserId: Joi.object().keys({
@@ -7,7 +7,7 @@ export const logSchema = {
   findAll: {},
   insert: Joi.object().keys({
     location: Joi.object().keys({
-      type: Joi.string().valid('point'),
+      type: Joi.string().valid('Point'),
       coordinates: Joi.array().items(Joi.number()),
     }),
     temperature: Joi.number(),

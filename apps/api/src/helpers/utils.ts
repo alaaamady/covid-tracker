@@ -1,6 +1,5 @@
 import { Request } from 'express';
 import moment from 'moment';
-import Logger from '../core/Logger';
 
 export function findIpAddress(req: Request) {
   try {
@@ -11,7 +10,7 @@ export function findIpAddress(req: Request) {
     }
     return req.ip;
   } catch (e) {
-    Logger.error(e);
+    console.error(e);
     return undefined;
   }
 }

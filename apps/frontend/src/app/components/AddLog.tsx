@@ -46,6 +46,7 @@ export const AddLog: React.FC = () => {
     const apiUrl = 'http://localhost:3000';
     try {
       const accessToken = await getAccessTokenSilently();
+      console.log(accessToken);
       const addNewLogUrl = `${apiUrl}/api/logs`;
       const body = {
         temperature: temperature,
@@ -71,7 +72,7 @@ export const AddLog: React.FC = () => {
   };
   return (
     <>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="contained" onClick={handleClickOpen} size="large">
         Add Log
       </Button>
       <Dialog open={open} onClose={handleClose}>

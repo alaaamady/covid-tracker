@@ -14,6 +14,7 @@ export const LogList = () => {
     const getUserLogs = async () => {
       const apiUrl = 'http://localhost:3000';
       const accessToken = await getAccessTokenSilently();
+      console.log(accessToken);
       const response = await fetch(`${apiUrl}/api/logs/personal`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -21,21 +22,20 @@ export const LogList = () => {
         },
       });
       const json = await response.json();
+      console.log(json);
       const logs = json.data;
       setUserLogs(logs.length ? logs : [logs]);
     };
     getUserLogs();
   }, [getAccessTokenSilently]);
-
-  console.log(userLogs);
   return (
     <Box>
       <Typography variant="h3">Your Log History</Typography>
-      <List>
-        {userLogs?.map((log) => {
+      <List style={{ textAlign: 'center' }}>
+        {userLogs?.map((log, key) => {
           return (
             <>
-              <ListItem>
+              <ListItem key={key}>
                 <Box flexDirection={'column'}>
                   <Typography variant="h4">{log.temperature} °C</Typography>
                   <Typography variant="h4">

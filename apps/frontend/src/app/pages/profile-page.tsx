@@ -29,7 +29,12 @@ export const ProfilePage: React.FC = () => {
 
   return (
     <PageLayout>
-      <Card variant="outlined">
+      <Card
+        variant="outlined"
+        sx={{
+          margin: '15%',
+        }}
+      >
         <CardHeader
           title={
             <Typography variant="h3" justifyContent={'center'}>
@@ -44,9 +49,6 @@ export const ProfilePage: React.FC = () => {
           }
         />
         <CardContent>
-          <Typography variant="h5" gutterBottom>
-            {userMetadata?.email ?? user.email}
-          </Typography>
           <Box display="flex">
             <EditButton />
           </Box>

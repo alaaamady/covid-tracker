@@ -1,6 +1,6 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import React, { useState } from 'react';
-import { Button, TextField, Box } from '@mui/material';
+import { Button, TextField, Box, Typography } from '@mui/material';
 
 export const EditButton: React.FC = () => {
   const [name, setName] = useState('');
@@ -40,24 +40,27 @@ export const EditButton: React.FC = () => {
   };
 
   return (
-    <Box flexDirection={'column'}>
-      <h1>Edit Name</h1>
-      <Box alignItems={'center'}>
-        <TextField
-          id="outlined-basic"
-          label="New Name"
-          variant="outlined"
-          onChange={(e) => setName(e.target.value)}
-        />
-        <Button
-          onClick={handleEdit}
-          color={'primary'}
-          size="large"
-          sx={{ marginLeft: 2 }}
-        >
-          Edit name
-        </Button>
-      </Box>
+    <Box sx={{ textAlign: 'left', flexDirection: 'column' }}>
+      <Typography variant="h4">Edit Name</Typography>
+      <TextField
+        id="outlined-basic"
+        label="New Name"
+        variant="outlined"
+        onChange={(e) => setName(e.target.value)}
+        fullWidth
+        sx={{
+          marginTop: '5%',
+        }}
+      />
+      <Button
+        onClick={handleEdit}
+        color={'primary'}
+        size="large"
+        sx={{ marginTop: '5%' }}
+        variant="contained"
+      >
+        Edit name
+      </Button>
     </Box>
   );
 };

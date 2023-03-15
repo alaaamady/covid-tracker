@@ -3,9 +3,7 @@ import { db } from '../config';
 
 console.log('DB', db);
 // Build the connection string
-const dbURI = `mongodb://${db.user}:${encodeURIComponent(db.password)}@${
-  db.host
-}:${db.port}/${db.name}`;
+const dbURI = db.connectionString;
 const options = {
   autoIndex: true,
   minPoolSize: db.minPoolSize, // Maintain up to x socket connections

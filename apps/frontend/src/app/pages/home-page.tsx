@@ -1,8 +1,8 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { Typography, Box } from '@mui/material';
 import React from 'react';
-import { AddLog } from '../components/AddLog';
-import { LogList } from '../components/LogList';
+import { AddLog } from '../components/buttons/add-log-button';
+import { LogList } from '../components/log-list';
 import { PageLayout } from '../components/page-layout';
 
 export const HomePage: React.FC = () => {

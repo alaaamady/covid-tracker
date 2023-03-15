@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { CircularProgress } from '@mui/material';
 import { useAuth0 } from '@auth0/auth0-react';
 import { PageLayout } from '../components/page-layout';
-import { AddLog } from '../components/AddLog';
+import { AddLog } from '../components/buttons/add-log-button';
 import { Box } from '@mui/system';
 
 interface LogList {
@@ -56,6 +56,7 @@ export const Dashboard: React.FC = () => {
     };
     getLogList();
   }, [getAccessTokenSilently]);
+  console.log(mapboxToken);
   return (
     <PageLayout>
       {!loading ? (

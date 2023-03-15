@@ -43,7 +43,7 @@ export const AddLog: React.FC = () => {
   };
 
   const handleSubmit = async () => {
-    const apiUrl = 'http://localhost:3000';
+    const apiUrl = import.meta.env.VITE_API_URL;
     try {
       const accessToken = await getAccessTokenSilently();
       console.log(accessToken);

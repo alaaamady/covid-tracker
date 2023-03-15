@@ -12,7 +12,7 @@ export const LogList = () => {
   const { getAccessTokenSilently } = useAuth0();
   useEffect(() => {
     const getUserLogs = async () => {
-      const apiUrl = 'http://localhost:3000';
+      const apiUrl = import.meta.env.VITE_API_URL;
       const accessToken = await getAccessTokenSilently();
       console.log(accessToken);
       const response = await fetch(`${apiUrl}/api/logs/personal`, {

@@ -26,7 +26,7 @@ export const Dashboard: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [logList, setLogList] = useState<LogList[]>();
   const { getAccessTokenSilently } = useAuth0();
-
+  const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN;
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -42,7 +42,7 @@ export const Dashboard: React.FC = () => {
     );
     const getLogList = async () => {
       const accessToken = await getAccessTokenSilently();
-      const apiUrl = 'http://localhost:3000';
+      const apiUrl = import.meta.env.VITE_API_URL;
       const getAllLogsUrl = `${apiUrl}/api/logs`;
       const allLogsResponse = await fetch(getAllLogsUrl, {
         headers: {
@@ -67,7 +67,7 @@ export const Dashboard: React.FC = () => {
           }}
           style={{ width: '100%', height: '100%' }}
           mapStyle="mapbox://styles/mapbox/streets-v9"
-          mapboxAccessToken="pk.eyJ1IjoiYWxhYW1hZHkiLCJhIjoiY2xmN3o1ZHc5MDAxczQzb2ljaWJsemlqciJ9.hsQyC8LhKEhQ8X0PvfMQHQ"
+          mapboxAccessToken={mapboxToken}
         >
           {selectedLog && (
             <Popup

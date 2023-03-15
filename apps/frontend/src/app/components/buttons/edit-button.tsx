@@ -8,7 +8,7 @@ export const EditButton: React.FC = () => {
 
   const handleEdit = async () => {
     const domain = 'dev-cy0zxa6lnzeog5qu.us.auth0.com';
-    const apiUrl = 'http://localhost:3000';
+    const apiUrl = import.meta.env.VITE_API_URL;
     try {
       const accessToken = await getAccessTokenSilently({
         authorizationParams: {

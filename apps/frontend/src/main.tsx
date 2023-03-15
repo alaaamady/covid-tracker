@@ -9,6 +9,7 @@ import { Auth0ProviderWithNavigate } from './app/auth0-provider-with-navigate';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
   <StrictMode>
     <BrowserRouter>

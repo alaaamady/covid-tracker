@@ -57,7 +57,6 @@ export const Dashboard: React.FC = () => {
     getLogList();
   }, [getAccessTokenSilently]);
   console.log(mapboxToken);
-  // commit
   return (
     <PageLayout>
       {!loading ? (

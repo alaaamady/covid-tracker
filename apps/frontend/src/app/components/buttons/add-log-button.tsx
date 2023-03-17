@@ -46,7 +46,7 @@ export const AddLog: React.FC = () => {
     const apiUrl = import.meta.env.VITE_API_URL;
     try {
       const accessToken = await getAccessTokenSilently();
-      const addNewLogUrl = `${apiUrl}/api/logs`;
+      const addNewLogUrl = `${apiUrl}/logs`;
       const body = {
         temperature: temperature,
         location: {

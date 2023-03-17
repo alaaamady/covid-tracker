@@ -14,7 +14,7 @@ export const LogList = () => {
     const getUserLogs = async () => {
       const apiUrl = import.meta.env.VITE_API_URL;
       const accessToken = await getAccessTokenSilently();
-      const response = await fetch(`${apiUrl}/api/logs/personal`, {
+      const response = await fetch(`${apiUrl}/logs/personal`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
           'Content-Type': 'application/json',

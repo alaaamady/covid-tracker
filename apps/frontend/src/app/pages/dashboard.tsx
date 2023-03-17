@@ -43,7 +43,7 @@ export const Dashboard: React.FC = () => {
     const getLogList = async () => {
       const accessToken = await getAccessTokenSilently();
       const apiUrl = import.meta.env.VITE_API_URL;
-      const getAllLogsUrl = `${apiUrl}/api/logs`;
+      const getAllLogsUrl = `${apiUrl}/logs`;
       const allLogsResponse = await fetch(getAllLogsUrl, {
         headers: {
           Authorization: `Bearer ${accessToken}`,

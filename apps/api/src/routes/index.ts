@@ -19,6 +19,21 @@ const validateAccessToken = auth({
 
 const router = express.Router();
 
+const getUserIdFromToken = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const decodedToken: User = jwt_decode(req.headers.authorization);
+    const userId = decodedToken.sub;
+    req.params.userId = userId;
+    return next();
+  } catch (error) {
+    next(error);
+  }
+};
+
 /**************************************
  *
  *  HEALTH CHECK
@@ -51,7 +66,7 @@ const editName = asyncHandler(async (req, res) => {
   const config = {
     method: 'patch',
     maxBodyLength: Infinity,
-    url: `https://${process.env.AUTH0_DOMAIN}/api/v2/users/${req.body.userId}`,
+    url: `https://${process.env.AUTH0_DOMAIN}/api/v2/users/${req.params.userId}`,
     headers: {
       Authorization: `Bearer ${process.env.AUTH0_MANAGEMENT_API_ACCESS_TOKEN}`,
       'Content-Type': 'application/json',
@@ -60,8 +75,6 @@ const editName = asyncHandler(async (req, res) => {
   };
 
   const metadataResponse = await axios(config);
-  // const response = await metadataResponse.json();
-  console.log(metadataResponse);
   new SuccessResponse(
     'USERNAME CHANGED SUCCESSFULLY',
     metadataResponse.data
@@ -71,6 +84,7 @@ const editName = asyncHandler(async (req, res) => {
 router.patch(
   '/name',
   validateAccessToken,
+  getUserIdFromToken,
   validator(editSchema.request, ValidationSource.BODY),
   editName
 );
@@ -80,21 +94,6 @@ router.patch(
  *  LOGS
  *
  **************************************/
-
-const getUserIdFromToken = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const decodedToken: User = jwt_decode(req.headers.authorization);
-    const userId = decodedToken.sub;
-    req.params.userId = userId;
-    return next();
-  } catch (error) {
-    next(error);
-  }
-};
 
 router.get(
   '/logs/personal',

@@ -4,7 +4,7 @@ import { Button, TextField, Box, Typography } from '@mui/material';
 
 export const EditButton: React.FC = () => {
   const [name, setName] = useState('');
-  const { getAccessTokenSilently, user } = useAuth0();
+  const { getAccessTokenSilently } = useAuth0();
 
   const handleEdit = async () => {
     const apiUrl = import.meta.env.VITE_API_URL;
@@ -13,7 +13,6 @@ export const EditButton: React.FC = () => {
       const userDetailsByIdUrlAPI = `${apiUrl}/name`;
 
       const body = {
-        userId: user?.sub,
         name: name,
       };
       const metadataResponse = await fetch(userDetailsByIdUrlAPI, {

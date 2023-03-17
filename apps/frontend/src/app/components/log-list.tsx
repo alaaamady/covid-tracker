@@ -22,36 +22,38 @@ export const LogList = () => {
       });
       const json = await response.json();
       const logs = json.data;
-      setUserLogs(logs.length ? logs : [logs]);
+      setUserLogs(logs);
     };
     getUserLogs();
   }, [getAccessTokenSilently]);
   return (
     <Box>
       <Typography variant="h3">Your Log History</Typography>
-      <List style={{ textAlign: 'center' }}>
-        {userLogs?.map((log, key) => {
-          return (
-            <>
-              <ListItem key={key}>
-                <Box flexDirection={'column'}>
-                  <Typography variant="h4">{log.temperature} °C</Typography>
-                  <Typography variant="h4">
-                    {`${new Date(log.createdAt).getDate()}-${
-                      new Date(log.createdAt).getMonth() + 1
-                    }-${new Date(log.createdAt).getFullYear()} ${new Date(
-                      log.createdAt
-                    ).getHours()}:${new Date(
-                      log.createdAt
-                    ).getMinutes()}:${new Date(log.createdAt).getSeconds()}`}
-                  </Typography>
-                </Box>
-              </ListItem>
-              <Divider />
-            </>
-          );
-        })}
-      </List>
+      {userLogs.length && (
+        <List style={{ textAlign: 'center' }}>
+          {userLogs?.map((log, key) => {
+            return (
+              <>
+                <ListItem key={key}>
+                  <Box flexDirection={'column'}>
+                    <Typography variant="h4">{log.temperature} °C</Typography>
+                    <Typography variant="h4">
+                      {`${new Date(log.createdAt).getDate()}-${
+                        new Date(log.createdAt).getMonth() + 1
+                      }-${new Date(log.createdAt).getFullYear()} ${new Date(
+                        log.createdAt
+                      ).getHours()}:${new Date(
+                        log.createdAt
+                      ).getMinutes()}:${new Date(log.createdAt).getSeconds()}`}
+                    </Typography>
+                  </Box>
+                </ListItem>
+                <Divider />
+              </>
+            );
+          })}
+        </List>
+      )}
     </Box>
   );
 };

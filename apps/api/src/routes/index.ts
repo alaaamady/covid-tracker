@@ -13,7 +13,7 @@ import { User } from '@auth0/auth0-react';
 import LogRepo from '../database/repository/LogRepo';
 
 const validateAccessToken = auth({
-  issuerBaseURL: process.env.AUTH0_DOMAIN,
+  issuerBaseURL: `https://${process.env.AUTH0_DOMAIN}`,
   audience: process.env.AUTH0_AUDIENCE,
 });
 

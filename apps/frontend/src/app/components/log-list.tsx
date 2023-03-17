@@ -14,7 +14,6 @@ export const LogList = () => {
     const getUserLogs = async () => {
       const apiUrl = import.meta.env.VITE_API_URL;
       const accessToken = await getAccessTokenSilently();
-      console.log(accessToken);
       const response = await fetch(`${apiUrl}/api/logs/personal`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -22,7 +21,6 @@ export const LogList = () => {
         },
       });
       const json = await response.json();
-      console.log(json);
       const logs = json.data;
       setUserLogs(logs.length ? logs : [logs]);
     };

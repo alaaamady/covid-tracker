@@ -15,7 +15,6 @@ export const ProfilePage: React.FC = () => {
   const [userMetadata, setUserMetadata] = useState<User>();
   //calback
   const { user } = useAuth0();
-  console.log(user);
   useEffect(() => {
     setUserMetadata({
       name: user?.name,

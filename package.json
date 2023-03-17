@@ -2,7 +2,10 @@
   "name": "covid-tracker",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "build": "yarn nx run-many --target=build --projects=frontend,api --parallel=true",
+    "start": "node dist/apps/api/main.js"
+  },
   "private": true,
   "dependencies": {
     "@auth0/auth0-react": "^2.0.1",

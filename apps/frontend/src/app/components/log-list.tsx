@@ -29,7 +29,7 @@ export const LogList = () => {
   return (
     <Box>
       <Typography variant="h3">Your Log History</Typography>
-      {userLogs.length && (
+      {userLogs?.length && (
         <List style={{ textAlign: 'center' }}>
           {userLogs?.map((log, key) => {
             return (

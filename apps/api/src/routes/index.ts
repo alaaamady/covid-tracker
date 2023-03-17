@@ -51,7 +51,7 @@ const editName = asyncHandler(async (req, res) => {
   const config = {
     method: 'patch',
     maxBodyLength: Infinity,
-    url: `${process.env.AUTH0_DOMAIN}/api/v2/users/${req.body.userId}`,
+    url: `https://${process.env.AUTH0_DOMAIN}/api/v2/users/${req.body.userId}`,
     headers: {
       Authorization: `Bearer ${process.env.AUTH0_MANAGEMENT_API_ACCESS_TOKEN}`,
       'Content-Type': 'application/json',

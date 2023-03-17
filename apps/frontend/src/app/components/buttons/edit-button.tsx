@@ -10,7 +10,7 @@ export const EditButton: React.FC = () => {
     const apiUrl = import.meta.env.VITE_API_URL;
     try {
       const accessToken = await getAccessTokenSilently();
-      const userDetailsByIdUrlAPI = `${apiUrl}/edit-name`;
+      const userDetailsByIdUrlAPI = `${apiUrl}/name`;
 
       const body = {
         userId: user?.sub,

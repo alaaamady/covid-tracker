@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from 'express';
 import asyncHandler from '../helpers/asyncHandler';
-import { SuccessMsgResponse, SuccessResponse } from '../core/ApiResponse';
+import { SuccessResponse } from '../core/ApiResponse';
 import { InternalError } from '../core/ApiError';
 import mongoose from 'mongoose';
 import validator, { ValidationSource } from '../helpers/validator';
@@ -125,8 +125,8 @@ router.post(
   asyncHandler(async (req, res) => {
     req.body.userId = req.params.userId;
     req.body.createdAt = new Date();
-    await LogRepo.insert(req.body);
-    return new SuccessMsgResponse('LOG CREATED SUCCESSFULLY').send(res);
+    const logs = await LogRepo.insert(req.body);
+    return new SuccessResponse('LOG CREATED SUCCESSFULLY', logs).send(res);
   })
 );
 

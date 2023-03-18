@@ -1,10 +1,12 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, TextField, Box, Typography } from '@mui/material';
+import { StoreContext } from '../../store';
 
 export const EditButton: React.FC = () => {
   const [name, setName] = useState('');
   const { getAccessTokenSilently } = useAuth0();
+  const { setUserName } = useContext(StoreContext);
 
   const handleEdit = async () => {
     const apiUrl = import.meta.env.VITE_API_URL;
@@ -24,6 +26,7 @@ export const EditButton: React.FC = () => {
         body: JSON.stringify(body),
       });
       const response = await metadataResponse.json();
+      setUserName(response.data.name);
       return response;
     } catch (error) {
       console.log(error);

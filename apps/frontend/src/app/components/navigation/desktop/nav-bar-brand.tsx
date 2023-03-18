@@ -5,13 +5,7 @@ export const NavBarBrand: React.FC = () => {
   return (
     <div className="nav-bar__brand">
       <NavLink to="/">
-        <img
-          className="nav-bar__logo"
-          src={covidLogo}
-          alt="Auth0 shield logo"
-          width="50"
-          height="50"
-        />
+        <img src={covidLogo} alt="Covid logo" width="50" height="50" />
       </NavLink>
     </div>
   );

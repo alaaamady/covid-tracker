@@ -9,7 +9,8 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { StoreContext } from '../../store';
 
 export const AddLog: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -18,6 +19,7 @@ export const AddLog: React.FC = () => {
     latitude: number;
   }>();
   const [temperature, setTemperature] = useState<number>();
+  const { setLogList } = useContext(StoreContext);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -63,6 +65,7 @@ export const AddLog: React.FC = () => {
         body: JSON.stringify(body),
       });
       const json = await response.json();
+      setLogList(json.data);
       setOpen(false);
       return json;
     } catch (error) {

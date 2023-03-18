@@ -1,5 +1,5 @@
 import { useAuth0, User } from '@auth0/auth0-react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { EditButton } from '../components/buttons/edit-button';
 import { PageLayout } from '../components/page-layout';
 import {
@@ -10,9 +10,12 @@ import {
   CardHeader,
   Box,
 } from '@mui/material';
+import { StoreContext } from '../store';
 
 export const ProfilePage: React.FC = () => {
   const [userMetadata, setUserMetadata] = useState<User>();
+  const { userName } = useContext(StoreContext);
+
   //calback
   const { user } = useAuth0();
   useEffect(() => {
@@ -25,7 +28,7 @@ export const ProfilePage: React.FC = () => {
   if (!user) {
     return null;
   }
-
+  console.log(userName ?? user.name);
   return (
     <PageLayout>
       <Card
@@ -37,7 +40,7 @@ export const ProfilePage: React.FC = () => {
         <CardHeader
           title={
             <Typography variant="h3" justifyContent={'center'}>
-              {userMetadata?.name ?? user.name}
+              {userName ?? user.name}
             </Typography>
           }
           avatar={

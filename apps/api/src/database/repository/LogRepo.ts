@@ -14,7 +14,8 @@ const findAll = async () => {
 const insert = async (log: Log) => {
   const now = new Date();
   log.createdAt = now;
-  return LogModel.create(log);
+  await LogModel.create(log);
+  return LogModel.find({}, { createdAt: 1, temperature: 1, _id: 0 });
 };
 
 export default {

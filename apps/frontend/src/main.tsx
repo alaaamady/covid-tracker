@@ -5,16 +5,18 @@ import './app/styles/styles.css';
 
 import App from './app/app';
 import { Auth0ProviderWithNavigate } from './app/auth0-provider-with-navigate';
+import { StoreProvider } from './app/store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-//aaaaaaaaaa
 root.render(
   <StrictMode>
     <BrowserRouter>
       <Auth0ProviderWithNavigate>
-        <App />
+        <StoreProvider>
+          <App />
+        </StoreProvider>
       </Auth0ProviderWithNavigate>
     </BrowserRouter>
   </StrictMode>

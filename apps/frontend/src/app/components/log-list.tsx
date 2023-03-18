@@ -1,14 +1,11 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { List, ListItem, Divider, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
+import { StoreContext } from '../store';
 
-interface Log {
-  temperature: number;
-  createdAt: Date;
-}
 export const LogList = () => {
-  const [userLogs, setUserLogs] = useState<Log[]>();
+  const { logList, setLogList } = useContext(StoreContext);
   const { getAccessTokenSilently } = useAuth0();
   useEffect(() => {
     const getUserLogs = async () => {
@@ -22,16 +19,17 @@ export const LogList = () => {
       });
       const json = await response.json();
       const logs = json.data;
-      setUserLogs(logs);
+      setLogList(logs);
+      return logs;
     };
     getUserLogs();
   }, [getAccessTokenSilently]);
   return (
     <Box>
       <Typography variant="h3">Your Log History</Typography>
-      {userLogs?.length && (
+      {logList?.length ? (
         <List style={{ textAlign: 'center' }}>
-          {userLogs?.map((log, key) => {
+          {logList?.map((log, key) => {
             return (
               <>
                 <ListItem key={key}>
@@ -53,7 +51,7 @@ export const LogList = () => {
             );
           })}
         </List>
-      )}
+      ) : null}
     </Box>
   );
 };
